@@ -1,6 +1,10 @@
 *.txt
 *.xhtml
 *.epub
+*.jpg
+*.gif
+*.png
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
