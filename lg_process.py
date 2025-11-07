@@ -47,7 +47,7 @@ def convert_file(book_dir:str):
     out_fn = os.path.join(out_dir,'000.xhtml')
     writer = new_file(out_fn,'Summary')
     for i,r in enumerate(content):
-        ln = r.strip('\t　 ')
+        ln = r.strip('\r\t　 ')
         if len(ln) == 0:
             writer.write("<br/>\n")
         elif ln[0] == '#': # header
