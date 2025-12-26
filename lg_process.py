@@ -3,6 +3,9 @@ import os
 from glob import glob
 import re
 
+
+IMG_PATTERN = r"\uff08插圖(\d+)\uff09"
+
 def check_file(fn:str):
     with open(fn) as f:
         content = f.read().splitlines()
@@ -47,20 +50,26 @@ def convert_file(book_dir:str):
     out_fn = os.path.join(out_dir,'000.xhtml')
     writer = new_file(out_fn,'Summary')
     for i,r in enumerate(content):
-        ln = r.strip('\r\t　 ')
+        ln = r.strip('\r\t \u3000')
+        #ln = r.strip('\r\t　 ')
+        img_match = re.search(IMG_PATTERN, ln)
         if len(ln) == 0:
             writer.write("<br/>\n")
         elif ln[0] == '#': # header
+            header = ln[1:].strip('\r\t \u3000')
             writer.write('</body>\n</html>\n')
             writer.close()
             print(ln)
             out_fn = os.path.join(out_dir,f'{counter:03d}.xhtml')
             counter += 1
-            writer = new_file(out_fn,ln[1:])
-            writer.write(f"  <h2>{ln[1:]}</h2>\n")
-        elif '（插圖' in ln:
+            writer = new_file(out_fn,header)
+            writer.write(f"  <h2>{header}</h2>\n")
+        #elif '（插圖' in ln:
+        elif img_match:
             print(ln)
-            img_index=ln.replace('（插圖','').replace('）','')
+            img_index = img_match.group(1)
+            #img_index=ln.replace('（插圖','').replace('\uff09','')
+            #img_index=ln.replace('（插圖','').replace('）','')
             img_fn = os.path.join('Images',f"{img_index}.jpg")
             writer.write(f"  <img alt='{img_index}' src='../{img_fn}'/>\n")
         else:
