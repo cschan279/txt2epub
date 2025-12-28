@@ -50,7 +50,8 @@ def convert_file(book_dir:str):
     out_fn = os.path.join(out_dir,'000.xhtml')
     writer = new_file(out_fn,'Summary')
     for i,r in enumerate(content):
-        ln = r.strip('\r\t \u3000')
+        ln = r.strip('\r\t \u3000\ufeff')
+        ln = ln.replace('\u3000','  ')
         #ln = r.strip('\r\t　 ')
         img_match = re.search(IMG_PATTERN, ln)
         if len(ln) == 0:
