@@ -5,6 +5,7 @@ import re
 
 
 IMG_PATTERN = r"\uff08插圖(\d+)\uff09"
+IMG_PATTERN = r"\uff08插圖(.{2,6})\uff09"
 
 def check_file(fn:str):
     with open(fn) as f:
@@ -83,6 +84,7 @@ def convert_file(book_dir:str):
 if __name__ == "__main__":
     #for fn in sorted(glob('text/*.txt')):
     path_list = list()
-    for ch_dir in glob('lg_txt/*/ch'):
+    #for ch_dir in glob('lg_txt/*/ch'):
+    for ch_dir in glob('/home/troy/Downloads/*/ch'):
         book_dir = os.path.dirname(ch_dir)
         convert_file(book_dir)
