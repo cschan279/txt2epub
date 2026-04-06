@@ -13,7 +13,7 @@ def create_epub():
     author = info.get('author')
     translator = info.get('translator')
     transcriber = info.get('transcribler')          # matches your JSON key exactly
-    source_urls = info.get('source URL(s)')
+    source_urls = info.get('source_urls')
 
     # Get and sort all chapter files
     txt_dir = './txt'

@@ -32,14 +32,14 @@ def convert_file(fn:str,nfn:str):
         for i,r in enumerate(content):
             if i==0:
                 nf.write(f'  <h2>{r}</h2>\n')
-	            #nf.write(f'  <h1>{r}</h1>\n')
-	        #elif r[:1].isdigit():#subheader
+                #nf.write(f'  <h1>{r}</h1>\n')
+            #elif r[:1].isdigit():#subheader
             elif r[:2] == '# ':#subheader
-	            nf.write(f'  <h2>{r}</h2>\n')
+                nf.write(f'  <h2>{r}</h2>\n')
             elif len(r)==0:#blank line
-	            pass
+                pass
             else:#normal content
-	            nf.write(f'  <p>{r}</p>\n')
+                nf.write(f'  <p>{r}</p>\n')
         nf.write('</body>\n')
         nf.write('</html>\n')
 
